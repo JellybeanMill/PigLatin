@@ -1,32 +1,57 @@
 import java.util.*;
 
 public void setup() {
-	String lines[] = loadStrings("words.txt");
+	String lines[] = loadStrings("LowellHymn.txt");
 	System.out.println("there are " + lines.length + " lines");
-	for (int i = 0 ; i < lines.length; i++) {
-	  System.out.println(pigLatin(lines[i]));
+	for(int lp1=0;lp1<lines.length;lp1++)
+	{
+		int wordCount = 1;
+		for(int lp2=0;lp2<lines[lp1].length();lp2++)
+		{
+			if(line[lp1].charAt(lp2)==' '){wordCount++;}
+		}
+		String [] words = new String(wordCount);
+		
+		for (int i = 0 ; i < lines.length; i++)
+		{
+			System.out.println(pigLatin(lines[i]));
+		}
 	}
 }
 public void draw()
 {
 }
 public int findFirstVowel(String sWord)
-//precondition: sWord is a valid String of length greater than 0.
-//postcondition: returns the position of the first vowel in sWord.  If there are no vowels, returns -1
 {
+	String [] mainVowels = {"a","e","i","o","u"};
+	for(int lp1=0;lp1<sWord.length();lp1++)
+	{
+		for(int lp2=0;lp2<mainVowels.length;lp2++)
+		{
+			if(sWord.substring(lp1,lp1+1).equals(mainVowels[lp2]))
+			{
+				return lp1;
+			}
+		}
+	}
 	return -1;
 }
 
 public String pigLatin(String sWord)
-//precondition: sWord is a valid String of length greater than 0
-//postcondition: returns the pig latin equivalent of sWord
 {
-	if(findFirstVowel(sWord) == -1)
+	int vowelPlace = findFirstVowel(sWord);
+	if(vowelPlace == -1)
 	{
 		return sWord + "ay";
 	}
-	else
+	else if(vowelPlace==0)
 	{
-		return "ERROR!";
+		return sWord + "way";
 	}
+	else if(vowelPlace>=1)
+	{
+		if(sWord.charAt(1)=='u'&&sWord.charAt(0)=='q'){return sWord.substring(2,sWord.length())+"quay";}
+		else{return sWord.substring(vowelPlace,sWord.length())+sWord.substring(0,vowelPlace)+"ay";}
+	}
+	else{return "ERROR";}
 }
