@@ -8,7 +8,11 @@ public void setup() {
 		int wordCount = 1;
 		for(int lp2=0;lp2<lines[lp1].length();lp2++)
 		{
-			if(line[lp1].charAt(lp2)==' '){wordCount++;}
+			if(line[lp1].charAt(lp2)==' ')
+			{
+
+				wordCount++;
+			}
 		}
 		String [] words = new String(wordCount);
 		
@@ -20,6 +24,17 @@ public void setup() {
 }
 public void draw()
 {
+}
+public String lineConvert(String sWord)
+{
+	String [] mainLetters = loadStrings("letters.txt");
+	for(int lp1 =0;lp1<sWord.length();lp1++)
+	{
+		for(int lp2=0;lp2<mainLetters.length;lp2++)
+		{
+			if(lp1)
+		}
+	}
 }
 public int findFirstVowel(String sWord)
 {
