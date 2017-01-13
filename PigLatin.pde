@@ -1,8 +1,7 @@
-import java.util.*;
 int lineCounter=0;
 String lines[];
 public void setup() {
-	String lines[] = loadStrings("LowellHymn.txt");
+	lines = loadStrings("LowellHymn.txt");
 	System.out.println("there are " + lines.length + " lines");
 }
 public void draw()
@@ -12,26 +11,26 @@ public void draw()
 }
 public String lineConvert(String sWord)
 {
-	System.out.println("here");
 	String [] mainLetters = loadStrings("letters.txt");
 	int wordStartInt=0;
-	System.out.println("here1");
+	String returnWord; 
 	while(wordStartInt<sWord.length())
 	{
-		String returnWord = new String();
+		returnWord = new String();
 		for(int lp1=wordStartInt;lp1<sWord.length();lp1++)
 		{
+			boolean returnWordChanged = false;
 			for(int lp2=0;lp2<mainLetters.length;lp2++)
 			{
 				if(sWord.substring(lp1,lp1+1).equals(mainLetters[lp2])){returnWord=returnWord+sWord.charAt(lp1);}
-				else{break;}
-				System.out.println("here2");
+				returnWordChanged = true;
 			}
+			if(returnWordChanged == false){break;}
 		}
 		returnWord=pigLatin(returnWord);
-		System.out.println("here3");
-		sWord=sWord.substring(0,wordStartInt)+returnWord+sWord.substring(wordStartInt+returnWord.length(),sWord.length());
-		System.out.println("here4");
+		println(sWord);
+		if(wordStartInt==0){sWord=returnWord+sWord.substring(wordStartInt+returnWord.length(),sWord.length());}
+		else{sWord=sWord.substring(0,wordStartInt)+returnWord+sWord.substring(wordStartInt+returnWord.length(),sWord.length());}
 		wordStartInt+=returnWord.length();
 	}
 	return sWord;
