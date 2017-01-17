@@ -1,4 +1,5 @@
 int lineCounter=0;
+int addedletters=0;
 String lines[];
 public void setup() {
 	lines = loadStrings("LowellHymn.txt");
@@ -22,16 +23,21 @@ public String lineConvert(String sWord)
 			boolean returnWordChanged = false;
 			for(int lp2=0;lp2<mainLetters.length;lp2++)
 			{
-				if(sWord.substring(lp1,lp1+1).equals(mainLetters[lp2])){returnWord=returnWord+sWord.charAt(lp1);}
-				returnWordChanged = true;
+				if(sWord.substring(lp1,lp1+1).equals(mainLetters[lp2]))
+				{
+					returnWord=returnWord+sWord.charAt(lp1);
+					returnWordChanged = true;
+				}
+				println("returnWord:"+returnWord);
 			}
 			if(returnWordChanged == false){break;}
 		}
 		returnWord=pigLatin(returnWord);
-		println(sWord);
+		println("returnWord: " + returnWord);
 		if(wordStartInt==0){sWord=returnWord+sWord.substring(wordStartInt+returnWord.length(),sWord.length());}
 		else{sWord=sWord.substring(0,wordStartInt)+returnWord+sWord.substring(wordStartInt+returnWord.length(),sWord.length());}
-		wordStartInt+=returnWord.length();
+		wordStartInt+=(returnWord.length()+addedletters);
+		addedletters=0;
 	}
 	return sWord;
 }
@@ -56,14 +62,17 @@ public String pigLatin(String sWord)
 	int vowelPlace = findFirstVowel(sWord);
 	if(vowelPlace == -1)
 	{
+		addedletters = 2;
 		return sWord + "ay";
 	}
 	else if(vowelPlace==0)
 	{
+		addedletters = 3;
 		return sWord + "way";
 	}
 	else if(vowelPlace>=1)
 	{
+		addedletters=2;
 		if(sWord.charAt(1)=='u'&&sWord.charAt(0)=='q'){return sWord.substring(2,sWord.length())+"quay";}
 		else{return sWord.substring(vowelPlace,sWord.length())+sWord.substring(0,vowelPlace)+"ay";}
 	}
