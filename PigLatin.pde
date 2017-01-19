@@ -7,15 +7,25 @@ public void setup() {
 }
 public void draw()
 {
-	System.out.println(lineConvert(lines[lineCounter]));
+	if(lineCounter<lines.length)
+		System.out.println(lineConvert(lines[lineCounter]));
 	lineCounter++;
 }
 public String lineConvert(String sWord)
 {
 	String returnable = new String();
+	ArrayList<WordBundle> wordList = new ArrayList<WordBundle>();
+	wordList.add(new WordBundle());
+	int wordListNum = 0;
 	for(int lp1=0;lp1<sWord.length();lp1++)
 	{
-		
+		if(Character.isLetter(sWord.charAt(lp1))||sWord.charAt(lp1)=='\''||sWord.charAt(lp1)=='-')
+			wordList[wordListNum].word+=sWord.charAt(lp1);
+		else
+		{
+			wordListNum++;
+			wordList.add(new WordBundle());
+		}
 	}
 	return sWord;
 }
@@ -57,6 +67,14 @@ public String pigLatin(String sWord)
 }
 class WordBundle
 {
-	public int location;
-	public String word;
+	private int location;
+	private String word;
+	public WordBundle(int inputLocation)
+	{
+		location = inputLocation;
+		word = new String();
+	}
+	public getLocation(){return location;}
+	public setWord(String inputWord){word=inputWord;}
+	public getWord(){return word;}
 }
