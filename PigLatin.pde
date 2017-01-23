@@ -15,16 +15,16 @@ public String lineConvert(String sWord)
 {
 	String returnable = new String();
 	ArrayList<WordBundle> wordList = new ArrayList<WordBundle>();
-	wordList.add(new WordBundle());
+	wordList.add(new WordBundle(0));
 	int wordListNum = 0;
 	for(int lp1=0;lp1<sWord.length();lp1++)
 	{
 		if(Character.isLetter(sWord.charAt(lp1))||sWord.charAt(lp1)=='\''||sWord.charAt(lp1)=='-')
-			wordList[wordListNum].word+=sWord.charAt(lp1);
+			wordList.get(wordListNum).setWord(wordList.get(wordListNum).getWord()+sWord.charAt(lp1));
 		else
 		{
 			wordListNum++;
-			wordList.add(new WordBundle());
+			wordList.add(new WordBundle(0));
 		}
 	}
 	return sWord;
@@ -75,6 +75,6 @@ class WordBundle
 		word = new String();
 	}
 	public getLocation(){return location;}
-	public setWord(String inputWord){word=inputWord;}
 	public getWord(){return word;}
+	public setWord(String inputWord){word=inputWord;}
 }
